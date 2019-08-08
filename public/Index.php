@@ -1,10 +1,13 @@
 <?php
+
+spl_autoload_register(function ($className){
+    include "..\App\Controller\\$className.php";
+});
 $path = explode("/", $_SERVER['REQUEST_URI']);
 $controllerName = $path[1];
 $actionName = $path[2];
 
 $controllerFileName = ucfirst($controllerName);
-include "..\App\Controller\\$controllerFileName.php";
 
 $controllerObj = new Index();
 $actionFuncName = $actionName . 'Action';
@@ -23,3 +26,11 @@ $controllerObj->$actionFuncName();
 
 
 $view123->render($tpl);
+
+/*
+{
+    "autoload": {
+    "psr-4": {"App\\": "App/", "Core\\": "Core/"}
+}
+}
+*/
