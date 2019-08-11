@@ -8,14 +8,15 @@ class ModelUser
     private $name;
     private $password;
     private $passwordHash;
+    private $fild = [];
 
-    public function save()
+    public function save($data)
     {
         $db = \Core\Context::i()->getDb();
         $insert = $db->exec(
-            "INSERT INTO news (title, content) VALUES (:title, content)",
+            "INSERT INTO news (title, content) VALUES (:title, :content)",
             __METHOD__,
-            ['title' => 'Привет, MVC', 'content' => $this->passwordHash]
+            $data
         );
         if (!$insert){
             return true;
@@ -67,6 +68,16 @@ class ModelUser
         }
 
         return $res;
+    }
+
+    public function check(&$error = '')
+    {
+        if(!$this->name){
+            $error = 'Пустое имя';
+            return false;
+        }
+
+        return true;
     }
 
     /**

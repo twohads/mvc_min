@@ -76,7 +76,7 @@ class Db
     {
         $timeQuery = microtime(1);
         $pdo = $this->getConection();
-        $prepared = $pdo->prepeare($query);
+        $prepared = $pdo->prepare($query);
         $result = $prepared->execute($params);
         if (!$result) {
             $errorInfo = $prepared->errorInfo();
@@ -86,12 +86,11 @@ class Db
         $affectedRows = $prepared->rowCount();
         $this->log[] = [$query, microtime(1) - $timeQuery, $method, $affectedRows];
 
-        return true;
     }
 
     public function lastUnsertId()
     {
-        return $this->getConection()->lastUnsertId();
+        return $this->getConection()->lastInsertId();
     }
 
     public function getLogHTML()
