@@ -1,0 +1,22 @@
+<?
+/** @var \App\Model\ModelUser[] $users */
+$users = $this->users;
+?>
+
+<div>
+    Выводим ID пользователя:
+</div>
+<?         echo '<pre>';
+var_dump($users); ?>
+Пользователи <br>
+<? if($users): ?>
+<? foreach ($users as $user): ?>
+        <div>
+            <?= $user->getPasswordHash(); ?>
+        </div>
+
+        <div>
+            <?= $user->getName(); ?>
+        </div>
+    <? endforeach; ?>
+<? endif; ?>

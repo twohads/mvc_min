@@ -1,12 +1,26 @@
 <?php
 
 
-class User
+namespace App\Controller;
+
+
+class User extends \Core\Controller
 {
-    public $view;
+    public function indexAction()
+    {
+        $this->render = false;
+        echo "Тестовый модуль";
+    }
 
     public function loginAction()
     {
-        echo "Регистрация";
+        $this->render = false;//TODO убрать повторения
+        echo __METHOD__;
+    }
+
+    public function registrAction()
+    {
+        $this->render = false;//TODO убрать повторения
+        echo __METHOD__;
     }
 }

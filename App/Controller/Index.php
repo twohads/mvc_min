@@ -1,18 +1,32 @@
 <?php
 
+namespace App\Controller;
 
-class Index
+use Core\Context;
+use App\Model\ModelUser;
+use Core\Controller;
+
+class Index extends Controller
 {
-    public $view;
-
     public function indexAction()
     {
-        include '../Model/ModelUser.php';
-        $this->view->modalUser = new ModelUser();
+        /*
+        $user = new ModelUser();
+        $user->getIdDb();
+        */
+        $users = ModelUser::getListMethod([1,2,3,4,5]);
+        $this->view->users = $users;
+        echo Context::i()->getDb()->getLogHTML();
     }
 
     public function testAction()
     {
-        echo 'Мы попали в контроллер: '.__CLASS__.' и вызываем экшн ' . __METHOD__ ;
+        $db = Context::i()->getDb();
+        $db->fetchAll('SELECT * FROM news', __METHOD__);
+
+        $this->view->test = new ModelUser();
+        var_dump($this->view->test);
     }
+
+
 }

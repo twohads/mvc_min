@@ -1,12 +1,13 @@
 <?php
 
-
-class Test
+namespace App\Controller;
+class Test extends \Core\Controller
 {
-    public $view;
 
     public function TestAction()
     {
+        $this->render = false;
         echo "Тестовый модуль";
+
     }
 }
