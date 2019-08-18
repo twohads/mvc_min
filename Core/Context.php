@@ -14,6 +14,24 @@ class Context
     /** @var Db */
     private $_db;
 
+    private $testContext;
+
+    /**
+     * @return mixed
+     */
+    public function getTestContext()
+    {
+        return $this->testContext;
+    }
+
+    /**
+     * @param mixed $testContext
+     */
+    public function setTestContext($testContext)
+    {
+        $this->testContext = $testContext;
+    }
+
     private function __construct()
     {
 

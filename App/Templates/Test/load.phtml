@@ -1,0 +1,15 @@
+<?
+$user = $this->user;
+?>
+
+Проверяем связи пользователя:</br> <?= $user[0]["user"]["name"];?>
+
+<? foreach ($user as $file): ?>
+    <ul>
+        <li><?= $file['file']?></li>
+    </ul>
+<? endforeach; ?>
+
+<div>
+    <a href="crm">Посмотреть всех пользователей</a>
+</div>

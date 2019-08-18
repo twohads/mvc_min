@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
+
 
 class ModelUser
 {
@@ -8,13 +9,12 @@ class ModelUser
     private $name;
     private $password;
     private $passwordHash;
-    private $fild = [];
 
     public function save($data)
     {
         $db = \Core\Context::i()->getDb();
         $insert = $db->exec(
-            "INSERT INTO news (title, content) VALUES (:title, :content)",
+            "INSERT INTO news (". implode(',', $data) .") VALUES (:title, :content)",
             __METHOD__,
             $data
         );

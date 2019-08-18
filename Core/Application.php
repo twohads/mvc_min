@@ -2,6 +2,9 @@
 
 
 namespace Core;
+
+use App\Models\Database;
+use App\Controller\Users;
 use Core\Exception\Error404;
 
 class Application
@@ -26,7 +29,7 @@ class Application
         try {
             $this->init();
             $this->_context->getDispacher()->dispacher();
-            $dispather = $this->_context->getDispacher(); //TODO Разобраться с дублежом диспетчеров
+            $dispather = $this->_context->getDispacher();
 
             $controllerFileName = 'App\Controller\\' . $dispather->getControllerName();
             if (!class_exists($controllerFileName)) {

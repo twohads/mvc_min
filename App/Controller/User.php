@@ -21,6 +21,9 @@ class User extends \Core\Controller
     public function registrAction()
     {
         $this->render = false;//TODO убрать повторения
+
         echo __METHOD__;
     }
+
+
 }

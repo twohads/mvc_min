@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use Core\Context;
-use App\Model\ModelUser;
+use App\Models\ModelUser;
 use Core\Controller;
+use Carbon\Carbon;
 
 class Index extends Controller
 {
@@ -28,5 +29,10 @@ class Index extends Controller
         var_dump($this->view->test);
     }
 
+    public function carbonAction()
+    {
+        $this->render = false;
+        $oldTime = Carbon::now();
+    }
 
 }

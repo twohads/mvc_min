@@ -1,40 +1,58 @@
 <?php
 
 namespace App\Controller;
-use App\Model\ModelUser;
+
+use App\Models\Database;
+use App\Models\File;
+use App\Models\User;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Mail;
+
+use Src\ImagesLoad;
+use Src\Mailer;
+
 
 class Test extends \Core\Controller
 {
+    protected static $imagePath;
 
-    public function TestAction()
+    public function preAction()
     {
-        $this->render = false;
-        echo "Тестовый модуль";
+        parent::preAction();
+        $this->noRender();
+        self::$_imagePath = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'images/';
+    }
+
+
+    public function loadAction()
+    {
+        new Database();
+        //$user = User::getByRelations(276);
+        $user = File::getByRelations(276);
+        $this->view->user = $user;
+    }
+
+    public function imageAction()
+    {
+        //$this->render = false;
+        //$image = new ImagesLoad();
+        //$image->test();
 
     }
-    //TODO Халтурный метод, нужно принять данные через массив
 
-    public function loadNewsAction()
+    public function mailAction()
     {
         $this->render = false;
-        $data['title'] = $_GET['title'] ?? '';
-        $data['content'] = $_GET['content'] ?? '';
+        $mail = new Mailer();
+        var_dump($mail->send());
+    }
 
-        $model = new ModelUser();
-        $model->loadData($data);
-
-        if(!$model->check($error)){
-            echo $error;
-            return;
-        }
-
-        if($model->save($data)){
-            echo "Ok";
-            return;
-        }else{
-            echo "Не Ok";
-        }
-
-
+    public function storageAction()
+    {
+        $this->render = false;
+        $image = $_FILES['file']['tmp_name'];
+        $imageName = $_FILES['file']['name'];
+        $image1 = new ImagesLoad();
+        $image1->secureLoadingImage($image, $imageName);
     }
 }
